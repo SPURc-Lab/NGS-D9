@@ -7,8 +7,8 @@ How to Install Bag2D
 5. make sure you know where the python program is. Deafult is /bin/usr/python
    run python --version  to check the version number must be version 1.2.3. and above.
    Version Python 2.7.5 was tested to be working well.
-6. instal BLASTALL and formatdb program. Version BLASTALL 2.2.30+ and formatdb 2.2.26 were tested to be working well.
+6. install BLASTALL and formatdb program. Version BLASTALL 2.2.30+ and formatdb 2.2.26 were tested to be working well.
 7. each reference database file needs to be performed by formatdb program.
  
-If there is an error, please contact yaolina@nus.edu.sg Lina Yao
+If there is an error, please contact yaolina@u.nus.edu Lina Yao
 or yuan_kun_lee@nuhs.edu.sg Professor Lee YK at National University of Singapore

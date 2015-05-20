@@ -9,7 +9,7 @@ def delete_dtseq():
     dtFile = open(sys.argv[1], 'r')
     inFile1 = open(sys.argv[2], 'r')
     inFile2 = open(sys.argv[3], 'r')
-    inFile3 = open(sys.argv[4], 'r')
+    #inFile3 = open(sys.argv[4], 'r')
     #inFile4 = open(sys.argv[5], 'r')
     #inFile5 = open(sys.argv[6], 'r')
     outFile = open("Dt_non-redundant_all_annotation.txt", 'w')
@@ -17,13 +17,13 @@ def delete_dtseq():
     dt_base = []
     tr1 = []
     tr2 = []
-    tr3 = []
+    #tr3 = []
     #tr4 = []
     #tr5 = []
     ptr_base = 0
     ptr1 = 1 
     ptr2 = 1
-    ptr3 = 1
+    #ptr3 = 1
     #ptr4 = 1
     #ptr5 = 1
     for line in dtFile.readlines():
@@ -33,8 +33,8 @@ def delete_dtseq():
         tr1.append(line.strip()) 
     for line in inFile2.readlines():
         tr2.append(line.strip())
-    for line in inFile3.readlines():
-        tr3.append(line.strip())
+    #for line in inFile3.readlines():
+    #    tr3.append(line.strip())
     #for line in inFile4.readlines():
     #    tr4.append(line.strip())
     #for line in inFile5.readlines():
@@ -56,15 +56,15 @@ def delete_dtseq():
         else:
             tmp_line = tmp_line + '\t'
  
-        if dt_base[ptr_base] == tr3[ptr3].split()[0]:
-            if len(tr3[ptr3].split('\t')) >= 4:
-                tmp_line = tmp_line + '\t' + tr3[ptr3].split('\t', 3)[1] + '\t' + tr3[ptr3].split('\t', 3)[3] 
-            else:
-                tmp_line = tmp_line + '\t' + tr3[ptr3].split('\t', 3)[1] + '\t' + 'NA'
-            if ptr3 < len(tr3) - 1:
-                ptr3 = ptr3 + 1
-        else:
-            tmp_line = tmp_line + '\t'
+        #if dt_base[ptr_base] == tr3[ptr3].split()[0]:
+        #    if len(tr3[ptr3].split('\t')) >= 4:
+        #        tmp_line = tmp_line + '\t' + tr3[ptr3].split('\t', 3)[1] + '\t' + tr3[ptr3].split('\t', 3)[3] 
+        #    else:
+        #        tmp_line = tmp_line + '\t' + tr3[ptr3].split('\t', 3)[1] + '\t' + 'NA'
+        #    if ptr3 < len(tr3) - 1:
+        #        ptr3 = ptr3 + 1
+        #else:
+        #    tmp_line = tmp_line + '\t'
 
         #if dt_base[ptr_base] == tr4[ptr4].split()[0]:
         #    tmp_line = tmp_line + '\t' + tr4[ptr4].split()[1]
@@ -88,7 +88,7 @@ def delete_dtseq():
     dtFile.close()
     inFile1.close()
     inFile2.close()
-    inFile3.close()
+    #inFile3.close()
     #inFile4.close()
     #inFile5.close()
     outFile.close()

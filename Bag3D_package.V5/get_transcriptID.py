@@ -36,7 +36,7 @@ def get_geneid():
         elif outer_query == True and 'Sequences producing significant alignments' in line:
             inner_query = True
         elif 'Query=' in line:
-            dt_name = line.strip().split()[-1]
+            dt_name = line.strip().split()[1]
             outer_query = True
          
     inFile.close()

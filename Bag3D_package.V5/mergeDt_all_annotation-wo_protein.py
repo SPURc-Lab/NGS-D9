@@ -3,6 +3,8 @@
 # <Original FASTA format file> e.g. Dt_non-redundant_seq.fa
 # <Annotation file> e.g., <transcriptID file> <geneID file> <protein_name file>
 # Python program to merge the annotation information
+# Change the split of the Dt names
+
 import sys
 
 def delete_dtseq():
@@ -13,6 +15,7 @@ def delete_dtseq():
     #inFile4 = open(sys.argv[5], 'r')
     #inFile5 = open(sys.argv[6], 'r')
     outFile = open("Dt_non-redundant_all_annotation.txt", 'w')
+    outFile.write('Dt_name\tCre_transcript\tE_value\tCre_geneID\n')
 
     dt_base = []
     tr1 = []
@@ -21,14 +24,14 @@ def delete_dtseq():
     #tr4 = []
     #tr5 = []
     ptr_base = 0
-    ptr1 = 1 
-    ptr2 = 1
-    #ptr3 = 1
-    #ptr4 = 1
-    #ptr5 = 1
+    ptr1 = 0 
+    ptr2 = 0
+    #ptr3 = 0
+    #ptr4 = 0
+    #ptr5 = 0
     for line in dtFile.readlines():
         if '>' in line:
-            dt_base.append(line.split('>')[-1].strip())
+            dt_base.append(line.split('>')[-1].split()[0])
     for line in inFile1.readlines():
         tr1.append(line.strip()) 
     for line in inFile2.readlines():
@@ -42,6 +45,7 @@ def delete_dtseq():
 
     while ptr_base < len(dt_base):
         tmp_line = dt_base[ptr_base]
+        #print tmp_line
         if dt_base[ptr_base] == tr1[ptr1].split()[0]: 
             tmp_line = tmp_line + '\t' + tr1[ptr1].split('\t', 1)[1].strip()
             if ptr1 < len(tr1) - 1:
@@ -82,7 +86,9 @@ def delete_dtseq():
 
         if tmp_line.strip() != dt_base[ptr_base]:
             outFile.write(tmp_line + '\n')      
-  
+ 
+        #print tmp_line 
+        #sys.exit(0)
         ptr_base = ptr_base + 1
 
     dtFile.close()

@@ -1,0 +1,28 @@
+2015.05.28
+Dt_non-redundant_v4.fa was generated from 1.Dt 1st time sample in 201407; 2.M14, D9, WT, KK-HL, KK-LL in 201410; 3. Radiah and HX's sample in 201411; 4. M14, WT_triplicate, KT-6 samples in 201505 using the following steps:
+1. merge_assembled.py old_file new_file "N"
+2. /home/nus/nano/ncbi-blast-2.2.30+/bin/blastx -num_threads 8 -evalue 1e-6 -db Chlre4_best_proteins.fasta -query Dt_update.fa > blast_output-1.txt
+3. python get_transcriptID.py blast_output-1.txt (rename transcriptID.txt to transcriptID-1.txt)
+4. python get_redundant.py transcriptID-1.txt (rename deleted_dtnames.txt to deleted_dtnames-1.txt)
+5. python delete_dtseq-1.py Dt_update.fa deleted_dtnames-1.txt 
+6. /home/nus/nano/ncbi-blast-2.2.30+/bin/blastx -num_threads 8 -evalue 1e-6 -db Chlre4_best_proteins.fasta -query Dt_non-redundant_seq-v"N".fa > blast_output-2.txt
+7. python get_transcriptID.py blast_output-2.txt (rename transcriptID.txt to transcriptID-2.txt)
+8. python get_redundant.py transcriptID-2.txt to check if the size of the output file deleted_dtnames.txt is 0? Is so, continues:
+9. python get_geneID.py blast_output-2.txt
+10. python mergeDt_all_annotation-wo_protein.py Dt_non-redundant_seq-v"N".fa transcriptID-2.txt geneID.txt (Dt_non-redundant_all_annotation-v"N".txt)
+
+If only the conserved contigs are used, a further filter step is needed to get the Dt_hit_seq.fa:
+11. python hit_seq.py Dt_non-redundant_seq.fa transcriptID-2.txt
+
+If Dt sequenced nucleotides obtained from NCBI would be added into the merged file, the following steps are to be done:
+12. merge the two files together using: cat Dt_ncbi.fa >> Dt_hit_seq.fa
+13. /home/nus/nano/ncbi-blast-2.2.30+/bin/blastx -num_threads 8 -evalue 1e-6 -db Chlre4_best_proteins.fasta -query Dt_hit_seq.fa > blast_output-3.txt 
+14. rename the Dt names from ncbi, python get_transcriptID.py blast_output-3.txt (rename transcriptID.txt to transcriptID-3.txt)
+15. python get_redundant_ncbi.py transcriptID-3.txt (rename deleted_dtnames.txt to deleted_dtnames-3.txt)
+16. python delete_dtseq-1.py Dt_hit_seq.fa deleted_dtnames-3.txt
+17. delete Dt_ncbi names from deleted_dtnames-3.txt
+18. /home/nus/nano/ncbi-blast-2.2.30+/bin/blastx -num_threads 8 -evalue 1e-6 -db Chlre4_best_proteins.fasta -query Dt_non-redundant_seq.fa > blast_output-4.txt
+19. python get_transcriptID.py blast_output-4.txt
+8. python get_redundant.py transcriptID-4.txt to check if the size of the output file deleted_dtnames.txt is 0? Is so, continues:
+9. python get_geneID.py blast_output-4.txt
+10. python mergeDt_all_annotation-wo_protein.py Dt_non-redundant_seq.fa transcriptID-4.txt geneID.txt (Dt_non-redundant_all_annotation-v"N"+ncbi.txt)

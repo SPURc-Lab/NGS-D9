@@ -28,7 +28,7 @@ def get_geneid():
                  else:
                      transcriptID = line.split()[0].split('|')[2] 
                      evalue = line.strip().split()[-1]
-                     outFile.write(dt_name + '\t' + 'CHLREDRAFT_' + transcriptID + '\t' + evalue + '\n')
+                     outFile.write(dt_name + '\t' + transcriptID + '\t' + evalue + '\n')
                      tophit = True
              elif line == '\n' and first_newline == False:
                  first_newline = True           
